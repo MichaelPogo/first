@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   Categories.plist
+   EasyLife
+
+   Created by hackeru on 21 Adar 5777.
+   Copyright (c) 5777 hackeru. All rights reserved.
+-->
+<plist version="1.0">
+    <array>
+        <string>Women Lifestyle</string>
+        <string>Men Lifestyle</string>
+        <string>Shopping</string>
+        <string>House Crafts</string>
+        <string>Inspiring</string>
+        <string>Crazy</string>
+        <string>Other</string>
+    </array>
+</plist>
