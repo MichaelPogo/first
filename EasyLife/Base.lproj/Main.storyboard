@@ -34,7 +34,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twf-xW-Ixv">
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sAm-Di-aAC"/>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3IJ-UH-9lt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EasyLife" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dw-1t-zZK">
@@ -43,10 +43,16 @@
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="100" height="-36"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akl-Bj-3V9">
+                                <state key="normal" title="Register"/>
+                                <connections>
+                                    <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fz7-g1-gYk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="h2D-7l-AX8" secondAttribute="trailing" id="ADR-0Z-4oi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="h2D-7l-AX8" secondAttribute="trailing" constant="116" id="ADR-0Z-4oi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="T0F-9n-AFH" secondAttribute="trailing" id="AU9-Sw-KIg"/>
                             <constraint firstAttribute="leadingMargin" secondItem="T0F-9n-AFH" secondAttribute="leading" id="DgK-Gm-Boc"/>
                             <constraint firstItem="twf-xW-Ixv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="E0z-gU-JOq"/>
@@ -54,11 +60,17 @@
                             <constraint firstItem="h2D-7l-AX8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="INl-gL-EF5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="twf-xW-Ixv" secondAttribute="trailing" constant="4" id="M9X-yp-yuq"/>
                             <constraint firstAttribute="leadingMargin" secondItem="h2D-7l-AX8" secondAttribute="leading" id="NUm-rq-AWQ"/>
+                            <constraint firstItem="akl-Bj-3V9" firstAttribute="centerY" secondItem="twf-xW-Ixv" secondAttribute="centerY" id="Uej-nV-7OM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="T0F-9n-AFH" secondAttribute="bottom" constant="20" id="aew-aQ-kht"/>
                             <constraint firstItem="0Dw-1t-zZK" firstAttribute="top" secondItem="h2D-7l-AX8" secondAttribute="bottom" constant="8.5" id="dZn-6V-enq"/>
                             <constraint firstItem="0Dw-1t-zZK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="g4P-fB-swu"/>
+                            <constraint firstItem="twf-xW-Ixv" firstAttribute="leading" secondItem="akl-Bj-3V9" secondAttribute="trailing" constant="8" id="mb5-dM-BIa"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="register" destination="akl-Bj-3V9" id="j8X-je-ghp"/>
+                        <outlet property="tbl" destination="T0F-9n-AFH" id="DVp-jQ-7xo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -82,12 +94,6 @@
                                     <action selector="backToMain:" destination="2xv-JQ-aLS" eventType="touchUpInside" id="Har-w6-Bgb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBi-m8-Uvk">
-                                <color key="backgroundColor" red="0.97539136572472773" green="1" blue="0.46664130865965081" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Share My LifeHack &gt;&gt;">
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cjn-3w-p9q">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -95,20 +101,40 @@
                                     <outlet property="delegate" destination="2xv-JQ-aLS" id="7Cf-QM-sXP"/>
                                 </connections>
                             </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Filter" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SZG-km-WAX">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="filterSearch:" destination="2xv-JQ-aLS" eventType="editingChanged" id="wwI-G3-Pyj"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hd-wa-bGe">
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="endEditing:" destination="2xv-JQ-aLS" eventType="touchUpInside" id="4fU-Yx-KKf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="7hd-wa-bGe" firstAttribute="leading" secondItem="SZG-km-WAX" secondAttribute="trailing" constant="8" id="2Ts-89-RP0"/>
                             <constraint firstAttribute="leadingMargin" secondItem="cjn-3w-p9q" secondAttribute="leading" constant="16" id="2nm-kF-reh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="VB0-DW-ynR" secondAttribute="leading" id="3Jo-l2-wfC"/>
+                            <constraint firstItem="7hd-wa-bGe" firstAttribute="leading" secondItem="yRx-Nl-xy9" secondAttribute="leadingMargin" constant="306" id="4Ez-Wn-N3J"/>
                             <constraint firstItem="vB8-o3-3W5" firstAttribute="top" secondItem="cjn-3w-p9q" secondAttribute="bottom" constant="1" id="FX7-la-ylL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xBi-m8-Uvk" secondAttribute="trailing" id="Jnn-pM-Q4m"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7hd-wa-bGe" secondAttribute="trailing" id="Om3-3b-PZN"/>
+                            <constraint firstItem="7hd-wa-bGe" firstAttribute="top" secondItem="bFt-Vb-J4L" secondAttribute="bottom" constant="46" id="RCS-Yc-Lkv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cjn-3w-p9q" secondAttribute="trailing" constant="-16" id="RIq-VO-TG5"/>
-                            <constraint firstItem="xBi-m8-Uvk" firstAttribute="top" secondItem="VB0-DW-ynR" secondAttribute="bottom" constant="8" id="T24-G5-exY"/>
-                            <constraint firstItem="cjn-3w-p9q" firstAttribute="top" secondItem="xBi-m8-Uvk" secondAttribute="bottom" constant="8" id="ZJn-SG-YDV"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="xBi-m8-Uvk" secondAttribute="leading" id="ajf-0L-JnP"/>
+                            <constraint firstItem="cjn-3w-p9q" firstAttribute="top" secondItem="bFt-Vb-J4L" secondAttribute="bottom" constant="84" id="UOh-kD-jQ5"/>
                             <constraint firstItem="VB0-DW-ynR" firstAttribute="top" secondItem="bFt-Vb-J4L" secondAttribute="bottom" constant="8" id="fns-j4-Y4d"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="SZG-km-WAX" secondAttribute="leading" id="q7Q-Fq-hRh"/>
+                            <constraint firstItem="SZG-km-WAX" firstAttribute="top" secondItem="VB0-DW-ynR" secondAttribute="bottom" constant="8" id="rBy-3W-Ac8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tbl" destination="cjn-3w-p9q" id="Htv-mg-bTA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i8p-Co-d5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

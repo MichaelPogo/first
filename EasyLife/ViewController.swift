@@ -12,13 +12,22 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     let bundle = Bundle.main;
     //array categories
     var categories:[String] = [];
+    var categoriesId:[String] = [];
     var imgs:[UIImage]!;
-    let backendless = Backendless.sharedInstance()!;
+    let backendless = Utils.backendless;
     let user: BackendlessUser = BackendlessUser();
+    @IBOutlet var tbl: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         //loading categories from plist
-        categories = NSArray(contentsOfFile: bundle.path(forResource: "Categories", ofType: "plist")!) as! Array;
+        Utils.myFind("Categories", resHandler: {(res) in
+            for r in res!.data as! [[String:Any]]{
+                self.categories.append(r["name"] as! String);
+                self.categoriesId.append(r["objectId"]as!String);
+            }
+            self.tbl.reloadData();
+        })
+        
     }
     
     // TableView Methods:
@@ -33,9 +42,21 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        let controller = storyboard?.instantiateViewController(withIdentifier: "lifeHacksList") as! LifeHacksViewController;
-        controller.getCategory(category: self.categories[indexPath.row]);
+        controller.getCategory(categoryId: self.categoriesId[indexPath.row]);
         present(controller, animated: true, completion: nil);
     }
     
+    @IBAction func login(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Login", message: nil, preferredStyle: .alert);
+        var uName,uPass : UITextField!;
+        alert.addTextField(configurationHandler: {(input) in
+            uName = input;
+            uName.placeholder = "user name";
+            });
+        
+    }
+    @IBAction func register(_ sender: UIButton) {
+        
+    }
 }
 

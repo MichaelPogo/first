@@ -1,8 +1,7 @@
 import UIKit
 
 class LifeHackTableViewCell: UITableViewCell {
-    
-    var desc    : UILabel!;
+    @IBOutlet var desc: UILabel!
     var user    : UILabel!;
     var details : UIButton!;
     var img     : UIImageView!;
@@ -15,26 +14,27 @@ class LifeHackTableViewCell: UITableViewCell {
     }
 
     override func draw(_ rect: CGRect) {
+         self.desc.text = lhData.desc;
         //get the cell width
         let cWidth  = bounds.width;
         //makes rounded corners at the bottom of the cell
         detailsView.layer.cornerRadius = 15;
         // create imageView dynamicly by calculating aspect ratio:
-        let imgWidth = lhData.img.size.width;//for aspect ratio calc
-        let imgHeight = lhData.img.size.height/imgWidth*cWidth;//
         img.image = lhData.img;
-        img.frame=CGRect(x: 0, y: 0, width: cWidth, height: imgHeight);
+        img.frame=CGRect(x: 0, y: 0, width: cWidth, height: Utils.calcHeight(img:lhData.img,width:cWidth));
         addSubview(img);
+        
     }
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         //instantiations
-        self.desc    = UILabel();
         self.user    = UILabel();
         self.details = UIButton();
         self.img     = UIImageView();
+       
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
