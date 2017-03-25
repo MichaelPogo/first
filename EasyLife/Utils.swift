@@ -28,4 +28,11 @@ public class Utils{
             print("couldn't load data with error code \(e?.faultCode)");
         })
     }
+    static func PresentMessageAlert(viewController:UIViewController,title:String?,message:String?,btnTitle:String?){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert);
+        alert.addAction(UIAlertAction(title: btnTitle, style: .default, handler: {(a)in
+            viewController.dismiss(animated: true, completion: nil);
+        }))
+        viewController.present(alert, animated: true, completion: nil);
+    }
 }

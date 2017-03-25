@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  EasyLife
-//
-//  Created by hackeru on 18 Adar 5777.
-//  Copyright © 5777 hackeru. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
@@ -15,10 +7,21 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     var categoriesId:[String] = [];
     var imgs:[UIImage]!;
     let backendless = Utils.backendless;
+    //let backendlessUser = BackendlessUser();
+    let uService = Utils.backendless.userService!;
     let user: BackendlessUser = BackendlessUser();
+    @IBOutlet var uInfo: UILabel!
     @IBOutlet var tbl: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        uService.isValidUserToken({(res)in
+            if res!.boolValue{
+            self.uInfo.text = "Welcome back \(self.uService.currentUser.name as String)";
+                }
+            }, error: {(fault)in
+                self.uInfo.text = "Guest";
+        
+        })
         //loading categories from plist
         Utils.myFind("Categories", resHandler: {(res) in
             for r in res!.data as! [[String:Any]]{
@@ -27,7 +30,6 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             }
             self.tbl.reloadData();
         })
-        
     }
     
     // TableView Methods:
@@ -45,18 +47,31 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         controller.getCategory(categoryId: self.categoriesId[indexPath.row]);
         present(controller, animated: true, completion: nil);
     }
-    
+    // check the code when Internet connection is available
     @IBAction func login(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Login", message: nil, preferredStyle: .alert);
+        let alert = UIAlertController(title: "Login:", message: nil, preferredStyle: .alert);
         var uName,uPass : UITextField!;
         alert.addTextField(configurationHandler: {(input) in
             uName = input;
-            uName.placeholder = "user name";
+            uName.placeholder = "eMail";
             });
-        
-    }
-    @IBAction func register(_ sender: UIButton) {
-        
+        alert.addTextField(configurationHandler: {(input) in
+            uPass = input;
+            uPass.placeholder = "password";
+            uPass.isSecureTextEntry = true;
+        });
+        alert.addAction(UIAlertAction(title: "login", style: .default, handler: {(a)in
+            //add code here
+            self.uService.login(uName.text, password: uPass.text, response: {(res)in
+                self.uInfo.text = res?.name as? String;
+                self.uService.setStayLoggedIn(true);
+                
+                }, error: {(fault)in
+                    Utils.PresentMessageAlert(viewController: self, title: "Error:", message: "wrong userName or password", btnTitle: "ok");
+            })
+        }));
+        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil));
+        present(alert, animated: true, completion: nil);
     }
 }
 
