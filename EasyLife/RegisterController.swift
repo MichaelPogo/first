@@ -20,13 +20,14 @@ class RegisterController: UIViewController {
     var loadingView : UIView!;
     override func viewDidLoad() {
         super.viewDidLoad()
+        Utils.assignbackground(view: view);
         designTextFields(userName,eMail,pass,cPass);
         actInd = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge);
         container = UIView();
         loadingView = UIView();
         loadUNames();
         if uNames.isEmpty{
-            showActivityIndicatory(uiView: view);
+            Utils.showActivityIndicatory(uiView: view);
         }
     }
     @IBAction func validateUName(_ sender: UITextField) {
@@ -85,48 +86,8 @@ class RegisterController: UIViewController {
                 self.uNames.append(r["name"] as! String);
             }
             print("********\(self.uNames)");
-            self.hideActivityIndicator();
+            Utils.hideActivityIndicator();
         })
-    }
-    
-    func showActivityIndicatory(uiView: UIView) {
-       
-        container.frame = uiView.frame
-        container.center = uiView.center
-        container.backgroundColor = UIColorFromHex(rgbValue: 0xffffff, alpha: 0.3);
-        
-        loadingView.frame = CGRect(x:0, y:0, width:100, height:100)
-        loadingView.center = uiView.center
-        loadingView.backgroundColor = UIColorFromHex(rgbValue: 0x444444, alpha: 0.7)
-        loadingView.clipsToBounds = true
-        loadingView.layer.cornerRadius = 10
-        
-        actInd.frame = CGRect(x: 0, y: 0, width: 50, height: 50);
-        actInd.center = CGPoint(x:loadingView.frame.size.width / 2, y:loadingView.frame.size.height / 2);
-        actInd.hidesWhenStopped = true
-        
-        loadingView.addSubview(actInd)
-        container.addSubview(loadingView)
-        uiView.addSubview(container)
-        actInd.startAnimating()
-        hideInputs(true);
-    }
-    private func hideActivityIndicator(){
-        actInd.stopAnimating();
-        container.isHidden=true;
-        hideInputs(false);
-    }
-    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
-        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-        let blue = CGFloat(rgbValue & 0xFF)/256.0
-        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
-    }
-    private func hideInputs(_ bool:Bool){
-        userName.isHidden = bool;
-        eMail.isHidden = bool;
-        pass.isHidden = bool;
-        cPass.isHidden = bool;
     }
     
     private func designTextFields(_ tf:UITextField...){
@@ -135,5 +96,8 @@ class RegisterController: UIViewController {
             t.layer.borderColor = UIColor.gray.cgColor;
             t.layer.cornerRadius = 8;
         }
+    }
+    @IBAction func back(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil);
     }
 }

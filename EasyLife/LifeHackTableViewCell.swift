@@ -29,11 +29,10 @@ class LifeHackTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //instantiations
         self.user    = UILabel();
         self.details = UIButton();
         self.img     = UIImageView();
-       
+        Utils.assignbackground(view: self);
 
     }
 
