@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="500" height="302"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="500" height="301"/>
+                <frame key="frameInset" width="500" height="302"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8v-vB-GGs">
@@ -27,7 +27,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Details&gt;&gt;"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i just want to test this label so im writing the first thing that comes to my head i think i wrote enought" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2Z-xm-TkN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text.." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2Z-xm-TkN">
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -64,6 +64,7 @@
             <connections>
                 <outlet property="desc" destination="j2Z-xm-TkN" id="SIT-vb-6ZN"/>
                 <outlet property="detailsView" destination="Q8v-vB-GGs" id="FrE-HO-j6c"/>
+                <outlet property="uName" destination="Ie4-1P-K9e" id="S0h-l2-n1H"/>
             </connections>
             <point key="canvasLocation" x="-8" y="57"/>
         </tableViewCell>

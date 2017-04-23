@@ -27,7 +27,16 @@ public class Utils{
     }
     static func myFind(_ tblName:String , resHandler:@escaping (BackendlessCollection?)->Void){
         backendless.data.ofTable(tblName).find(resHandler, error: {(e)in
-            print("couldn't load data with error code \(e?.faultCode)");
+            //logout to fix token problem
+            uService.logout();
+            print("couldn't load data with error code \(e?.faultCode!), message:\(e?.message!)");
+        })
+    }
+    static func myFind(_ tblName:String, dataQuery:BackendlessDataQuery , resHandler:@escaping (BackendlessCollection?)->Void){
+        backendless.data.ofTable(tblName).find(dataQuery,response: resHandler, error: {(e) in
+            //logout to fix token problem
+            uService.logout();
+            print("couldn't load data with error code \(e?.faultCode!), message:\(e?.message!)");
         })
     }
     static func PresentMessageAlert(viewController:UIViewController,title:String?,message:String?,btnTitle:String?){

@@ -1,10 +1,3 @@
-//
-//  RegisterController.swift
-//  EasyLife
-//
-//  Created by hackeru on 25 Adar 5777.
-//  Copyright © 5777 hackeru. All rights reserved.
-//
 
 import UIKit
 

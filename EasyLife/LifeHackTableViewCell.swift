@@ -1,20 +1,22 @@
 import UIKit
 
 class LifeHackTableViewCell: UITableViewCell {
-    @IBOutlet var desc: UILabel!
-    var user    : UILabel!;
-    var details : UIButton!;
     var img     : UIImageView!;
-    var lhData  : LifeHackData!;
+    var lhData  : LifeHacksData!;
+    @IBOutlet var desc: UILabel!
+    @IBOutlet var uName: UILabel!;
     @IBOutlet var detailsView: UIView!
     //set the data to use in the cell, method called in the TableViewController
-    func setlhData(_ lhData: LifeHackData){
+    func setlhData(_ lhData: LifeHacksData){
         self.lhData=lhData;
         
     }
 
     override func draw(_ rect: CGRect) {
-         self.desc.text = lhData.desc;
+        
+        Utils.assignbackground(view: self);
+        self.desc.text = lhData.txt;
+        self.uName.text = lhData.uName;
         //get the cell width
         let cWidth  = bounds.width;
         //makes rounded corners at the bottom of the cell
@@ -29,11 +31,9 @@ class LifeHackTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.user    = UILabel();
-        self.details = UIButton();
         self.img     = UIImageView();
         Utils.assignbackground(view: self);
-
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,33 +43,3 @@ class LifeHackTableViewCell: UITableViewCell {
     }
     
 }
-
-
-
-
-
-
-
-
-// create button dynamicly doesn't do anything for now
-/*details.setTitle("Details>", for: .normal);
- details.sizeToFit();
- details.frame.origin = CGPoint(x:cWidth-details.frame.width,y:imgHeight+1);
- addSubview(details);
- // create label dynamicly for text
- desc.frame.size.width = cWidth-details.frame.width;
- desc.frame.origin = CGPoint(x: 0, y: imgHeight+1);
- desc.numberOfLines = 2
- desc.text = lhData.desc;
- desc.font = desc.font.withSize(20);
- desc.sizeToFit();
- addSubview(desc);
- // create label for user info;
- user.text = lhData.user;
- user.frame.origin = CGPoint(x: 0, y: imgHeight+desc.frame.height+1);
- user.font = user.font.withSize(20);
- user.sizeToFit();
- addSubview(user);
- //height of desc + user WITH FONT SIZE OF 20 is: 72;
- print("*********** user height: \(user.frame.height)");
- print("########### desc height: \(desc.frame.height)");*/

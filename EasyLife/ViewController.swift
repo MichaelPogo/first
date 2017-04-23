@@ -31,6 +31,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             self.tbl.reloadData();
         })
     }
+    //check login in this method for not duplicate categories list when going back from LifeHacksController
     override func viewWillAppear(_ animated: Bool) {
         uService.isValidUserToken({(res)in
             let isLoggedIn = res!.boolValue

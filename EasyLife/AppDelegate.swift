@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  EasyLife
-//
-//  Created by hackeru on 18 Adar 5777.
-//  Copyright © 5777 hackeru. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
