@@ -19,32 +19,29 @@ class LifeHacksViewController: UIViewController, UITableViewDataSource,UITableVi
             Utils.showActivityIndicatory(uiView: view);
         }
         categoryLabel.text = categoryName;
-        //reminder: add query to reuest: 
-        Utils.myFind("Posts", resHandler: {(res) in
+        //reminder: add query to request:
+        let query = BackendlessDataQuery();
+        query.whereClause = "categories LIKE '%\(categoryId)%'";
+        Utils.myFind("Posts",dataQuery: query, resHandler: {(res) in
             
             for p in res?.data as! [[String:Any]]{
                 //Split the categories Id's and iterate over them
-                let catsId = (p["categories"] as! String).components(separatedBy: ";");
-                for id in catsId{
-                    
-                    if id == self.categoryId{
-                        let data = try! Data(contentsOf: URL(string: p["mainImage"] as! String)!);
-                        let lh = LifeHacksData();
-                        self.lifehacks.append(lh.set(img: UIImage(data: data)!).set(txt: p["text"] as! String).set(youtubeUrl:p["youtubeId"]));
-                        if let id = p["ownerId"] as? String{
-                            let dataQuery = BackendlessDataQuery();
-                            dataQuery.whereClause = "objectId = '\(id)'";
-                            self.backendless.persistenceService.ofTable("Users").find(dataQuery, response: {(res)in
-                                    let myDict = res!.data.first as! NSDictionary;
-                                    lh.set(uName: myDict["name"]! as! String);
-                                    self.tbl.reloadData();
-                                }
-                                , error: {(e)in
-                                    print("****************could not load user names");
-                            })
-                        }else{print("no owner");}
-                    }
-                }
+                //let catsId = (p["categories"] as! String).components(separatedBy: ";");
+                let data = try! Data(contentsOf: URL(string: p["mainImage"] as! String)!);
+                let lh = LifeHacksData();
+                self.lifehacks.append(lh.set(img: UIImage(data: data)!).set(txt: p["text"] as! String).set(youtubeUrl:p["youtubeId"]));
+                if let id = p["ownerId"] as? String{
+                    let dataQuery = BackendlessDataQuery();
+                    dataQuery.whereClause = "objectId = '\(id)'";
+                    self.backendless.persistenceService.ofTable("Users").find(dataQuery, response: {(res)in
+                            let myDict = res!.data.first as! NSDictionary;
+                            lh.set(uName: myDict["name"]! as! String);
+                            self.tbl.reloadData();
+                        }
+                        , error: {(e)in
+                            print("****************could not load user names");
+                    })
+                }else{print("no owner");}
             }
             self.reset();
             Utils.hideActivityIndicator();
